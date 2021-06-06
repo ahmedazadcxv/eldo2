@@ -1,0 +1,65 @@
+ 
+    {% extends "../base/base.html" %}
+    {% block title %}
+    all post {{ user.username }}
+    {% endblock %}
+    {% block content %}
+    {% include "base/nav-main.html" %}
+ 
+    <div class="row">
+      
+<div class="col-md-2">
+ 
+        <div class="card card-personal shadow-lg">
+  
+          <img class="read-more rounded-circle card-img-top" src="{% for data in avatar %}{{ data.avatar.url }} {% endfor %}" /> 
+      
+          <div class="card-body">
+            <a>
+              <h4 class="card-title title-one">{{ user.first_name }} </h4>
+            </a> 
+            <a href="/crud/all" class="btn btn-outline-primary mb-2 shadow"> <i class="fas fa-tachometer-alt"></i> جمع المقلات</a> 
+            <a href="/crud/new" class="btn btn-outline-primary mb-2 shadow"> <i class="fas fa-plus-square"></i>   post/video</a><br>
+            <a href="/crud/cat/all" class="btn btn-outline-danger mb-2 shadow"> <i class="fas fa-hotel"></i> جمع الاقسام</a><br>
+            <a href="/crud/cat/new" class="btn btn-outline-danger mb-2 shadow"> <i class="fas fa-plus-square"></i> اضاف قسم</a>
+          </div>
+  
+        </div>
+</div>
+    <div class="col-md-10 fontd">
+      <div id="news-slider" >
+        <H1>جمع الاقسام</H1>
+        <div class="row">
+    
+          {% load mptt_tags %}
+          {% recursetree user_posts %}
+    
+          
+        <div class="post-slide  col-md-3">
+          <img src="{{node.image.url}}" style="max-height: 222px; width: 251px;" class="shadowX"> 
+          <div class="post-content">
+            <h3 class="post-title">
+          <a href="{{post.get_url_categories}}"> <span class="read-more">{{node.name|truncatechars:50}}</span></a>
+ 
+            </h3>
+
+          <a href="/crud/cat/{{node.id}}/update" class="read-more">تحدث</a>
+          <a href="/crud/cat/{{node.id}}/delete" class="read-more">حذف</a>
+
+            </div>
+        </div>
+        
+        {% if not node.is_leaf_node %}
+        {{ children }}
+        {% endif %}
+
+        {% endrecursetree %}
+      </div>
+    </div>
+    </div>
+ 
+    </div>
+    
+ 
+{% include "base/footer.html" %}
+{% endblock %}

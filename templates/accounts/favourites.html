@@ -1,0 +1,35 @@
+{% extends "../base/base.html" %}
+{% block title %}Users Favourties{% endblock %}
+{% block content %}
+{% include "../base/nav-main.html" %}
+<div class="container">
+    <section class="jumbotron text-center bg-white">
+        <div class="container">
+            <h1>حفظ المستخدمون منشوراتهم المفضلة</h1>
+            <p class="lead text-muted">هنا يمكنك إزالة أو عرض المشاركات المفضلة التي أضفتها</p>
+        </div>
+    </section>
+    <div>
+        <div class="row">
+            {% for post in new %}
+      
+<div class="card read-more " style="width: 260px; margin: 7px;">
+
+    <div class="d-flex read-more " style="direction: ltr;">
+
+        <a href="{% url 'accounts:favourite_add' post.id %}"  class="btn btn-outline-primary">Remove</a> 
+      
+    </div>
+
+    <a href="{{post.get_absolute_url}}"><img class="card-img-top w-100 d-block shadow-lg" src="{{post.image.url}}" style="height: 155px;"></a>
+    <div class="card-body1">
+      <a href="{{post.get_absolute_url}}"> <span class="read-more">{{post.title|truncatechars:50}}</span></a>
+    </div>
+    
+  </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include "base/footer.html" %}
+{% endblock %}

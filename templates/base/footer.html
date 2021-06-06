@@ -1,0 +1,284 @@
+            <div class="container">
+                
+	<script type="text/javascript">
+
+		var setTheme = localStorage.getItem('theme')
+		console.log('theme:', setTheme)
+
+		if (setTheme == null){
+			swapStyle('/static/css/light.css')
+		}else{
+			swapStyle(setTheme)
+		}
+
+		function swapStyle(sheet){
+			document.getElementById('mystylesheet').href = sheet;
+            localStorage.setItem('theme', sheet);
+
+		}
+
+
+		
+    </script>
+    <style>
+        .nav-link:hover {
+    background: rgb(179 179 179 / 25%);
+}
+    </style>
+                <footer class=" " style=" border: 2px solid #ffffff; box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 61%); transition: .5s;">
+
+                    
+        {% load post_tag %}
+
+
+    <div class="row">
+
+        <div class="col-12 col-md row">
+            <!-- <a class="navbar-brand" ="="" "="">الد<span style="color: #3300ffe6;">كـ</span>تور</a> -->
+            <div class="col-3 mt-2"><img class="bg-light read-more p-0" src="/media/posts/default.jpg" width="100px" height="70px"></div>
+            <p class="col-9 p-4" style="font-size: 9px; line-height: 1.4;">الدكتور موقع طبي وصحة شامل. آخر المعلومات عن التغذية, الريجيم, الحمل والولادة, صحة الاطفال, أمراض السرطان, القلب, السكري,  والزواج وكافة طرق العلاج والادوية.</p>
+        </div>
+        
+        <div class="col-md-6">
+            <button type="button" class="nav-link read-more" data-toggle="modal" data-target="#exampleModal2">
+              اتصل بنا
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  
+                  <div class="modal-body fontd">
+                    <p>اتصل بنا</p>
+                    <form class="shadow">
+                      <!-- Name input -->
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form4Example1" class="form-control fontd" placeholder="الإ سم" />
+                      </div>
+                    
+                      <!-- Email input -->
+                      <div class="form-outline mb-4  ">
+                        <input type="email" id="form4Example2" class="form-control fontd" placeholder="عنوان بريد الكتروني" />
+                      </div>
+                    
+                      <!-- Message input -->
+                      <div class="form-outline mb-4  ">
+                        <textarea class="form-control fontd" id="form4Example3" placeholder="الرسالة" rows="4"></textarea>
+                      </div>
+                    
+                    
+                      <!-- Submit button -->
+                      <button type="submit" class="btn btn-primary btn-block mb-4  read-more">إرسال</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% pageTag %}
+    
+        </div>
+        <div class="row col-12">
+          <small class="col-4">
+            
+            <a class="fab fa-facebook" href="https://www.youtube.com/channel/UC4of8xqL-SpDvTdOrRzS4sw "  > </a>
+            <a class="fab fa-twitter" href="https://www.facebook.com/Eldoctooor" > </a>
+            <a class="fab fa-youtube" href="https://www.youtube.com/channel/UC4of8xqL-SpDvTdOrRzS4sw" style="color: crimson;" > </a>
+        
+          </small>
+    <small class="col-md-7 mb-5 text-muted text-center ">&copy; حقوق النشر محفوظة لمؤسسة الدكتور التعليمية والإعلامية - لندن - 2019-2021 <br>
+
+      This website is part of Eldoctor Ltd - UK Registered Company - Reg No: 13198911
+      
+      </small>
+    
+        </div>
+<script>
+    function formExit() {
+      document.getElementById("newForm").remove();
+    }
+  
+  
+  
+    function mylike(params) {
+      var postid = params;
+      var button = $(this).attr("value");
+      $.ajax({
+        type: 'POST',
+        url: '{% url "accounts:thumbs" %}',
+        data: {
+          postid: postid,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+          action: 'thumbs',
+          button: button,
+        },
+        success: function (json) {
+          if (json.length < 1 || json == undefined) {
+            //empty
+          }
+          document.getElementById("up" + params).innerHTML = json['up']
+          document.getElementById("down" + params).innerHTML = json['down']
+          $("svg").removeClass("thumb-active");
+  
+          if (json['remove'] == 'none') {
+            $("#" + button).removeClass("thumb-active");
+          } else {
+            $("#" + button).addClass("thumb-active");
+          }
+  
+        },
+        error: function (xhr, errmsg, err) { }
+      });
+    }
+  
+    $('#myForm').trigger("reset");
+  
+    function myid(params) {
+      $.ajax({
+        type: 'POST',
+        url: '{% url "accounts:like" %}',
+        data: {
+          postid: params,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+          action: 'post'
+        },
+        success: function (json) {
+          document.getElementById("like_count" + params).innerHTML = json['result']
+        },
+        error: function (xhr, errmsg, err) {
+  
+        }
+      });
+    }
+    
+// fav 
+    function fav(params,classd) { 
+      document.getElementById(classd).innerHTML = '<a href="/account/profile/favourites/"><svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bookmark-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4z"></path> <path fill-rule="evenodd" d="M15.854 2.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 4.793l2.646-2.647a.5.5 0 0 1 .708 0z"></path> </svg>';
+      $.ajax({
+        type: 'POST',
+        url: params,
+        data: {
+          postid: params,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+          action: 'post'
+        },
+        success: function (json) { 
+        },
+        error: function (xhr, errmsg, err) {
+  
+        }
+      });
+    }
+ // Fav
+ 
+ 
+
+
+
+ 
+ $(document).ready(function () {
+    $('.thumbaction').ready(function (e) {
+      e.preventDefault();
+      var postid = document.getElementById('thumbs').getAttribute('data-value');
+      var button = $(this).attr("value");
+      $.ajax({
+        type: 'POST',
+        url: '{% url "accounts:thumbs" %}',
+        data: {
+          postid: '31',
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+          action: 'thumbs',
+          button: 'thumbsup',
+        },
+        success: function (json) {
+          if (json.length < 1 || json == undefined) {
+            //empty
+          }
+          document.getElementById("up").innerHTML = json['up']
+          document.getElementById("down").innerHTML = json['down']
+          $("svg").removeClass("thumb-active");
+
+          if (json['remove'] == 'none') {
+            $("#" + button).removeClass("thumb-active");
+          } else {
+            $("#" + button).addClass("thumb-active");
+          }
+
+        },
+        error: function (xhr, errmsg, err) {}
+      });
+    });
+  });
+    
+  </script>
+
+
+
+
+
+
+
+
+
+
+<div class="container-fluid">  
+
+<nav class="fixed-bottom fontd navbar-expand  shadow-lg justify-content-center" >
+  <div class="container-fluid">  
+      <div class="collapse navbar-collapse" >
+          <ul class="nav navbar-nav p-0">
+              </li>
+              <a href="{% url 'blog:homepage' %}" class="nav-link p-0 fontd m-auto" ="/"><i class="fa fa-home" style="font-size:  20px;padding-left: 15px;"></i></a></li>
+              <a href="{% url 'blog:videos' %}" class="nav-link p-0 fontd m-auto" ="/"><i class="fa fa-desktop" style="font-size:  20px;padding-left: 15px;"></i></a> 
+              <a href="{% url 'boards:home' %}" class="nav-link p-0 fontd m-auto" ="/"><i class="fa fa-comment" style="font-size:  20px;padding-left: 15px;"></i></a> 
+                
+ <!-- Button trigger modal -->
+<button type="button" style="border: 0;" class="nav-link fontd" data-toggle="modal" data-target="#exampleModal"> 
+  <i class="fas fa-layer-group " style="font-size: 20px; "></i>
+</button>
+ 
+          </ul>
+          {% if request.user.is_authenticated %}
+          <a href="{% url "accounts:favourite_list" %}" class="nav-link active fontd" ="/"><i class="fa fa-heart" style="font-size: 21px;padding-right: 4px;padding-left: 4px; color: rgb(255, 0, 0);"></i></a> 
+
+          <div class="dropdown"><a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle" ="/" style="padding-left: 0px;padding-right: 17px;">
+            <img class="border rounded-circle" src="{% for data in avatar %} {{ data.avatar.url }} {% endfor %}" style="width: 22px;height: 22px;" /><span style="color: #000000;font-size: 20px;">{{ request.user  }}</span></a>
+              <div 
+                  class="dropdown-menu">
+                  <!-- <a class="dropdown-item" href="{% url 'crud:all'  %}">Dashboard</a> -->
+                  <a class="dropdown-item" href="{% url "accounts:edit" %}">تعدل التفاصيل</a>
+                  <a class="dropdown-item" href="/accounts/email/">أضف او تعدل البريد الالكتروني</a>
+                  <a class="dropdown-item" href="/accounts/password/change/">تغيير كلمة المرور</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/accounts/logout/">تسجيل خروج</a>
+      </div>
+        {% for data in avatar %}  
+            {% if data.dr %}
+            <a href="{% url 'crud:all' %}" class="fas fa-plus rounded-circle p-1" style="font-size: 15px;background: #e0e0e0"></a>
+            
+            {% endif %}
+        
+        {% endfor %}
+
+      {% else %}
+      <nav>
+        <a class="p-2 fontd shadow-lg " href="{% url 'account_signup' %}">إنشاء حساب</a>
+        <a class="p-2 text-white shadow-lg bg-dark " href="{% url 'account_login' %}">تسجيل الدخول</a>
+      </nav>
+      {% endif %}
+      <button onclick="swapStyle('/static/css/light.css')"  class="fas fa-sun"  style="font-size: 15px; padding: 1px;border: none;"></button> 
+
+     <button onclick="swapStyle('/static/css/dark.css')"  class="fas fa-moon"  style="font-size: 15px; padding: 1px;border: none;"></button> 
+    </div>
+</nav>
+  
+</div>
+
+
+
+
+
+<div>
+
+
+</footer>
