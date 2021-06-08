@@ -16,30 +16,38 @@
 
 {% block content %}
 {% include "base/nav-main.html" %}
-<div class="card">
-  <div class="row no-gutters">
-      <div class="col-auto">
-          <img src="{{ ProfileN.avatar.url }}" class="img-fluid read-more" width="333px" >
-          <div class="col-md-12" style="font-size: 50px; text-align: center;">
-            
-            {% if ProfileN.twitter %}
-            <a href="{{ ProfileN.twitter }}" class="fab fa-twitter shadow-lg" target="_blank"></a>
-            {% endif %}
-            {% if ProfileN.facebook %}
-            <a href="{{ ProfileN.facebook }}" class="fab fa-facebook shadow-lg " target="_blank"></a>
-            {% endif %}
-              
-          </div>
-      </div>
-      <div class="col read-more">
-          <div class="card-block px-2">
-            <h5 class="card-title" style="background: #f4b510; width: fit-content; ">{{ ProfileN.fullName }}</h5>
-            <p class="card-text read-more " style="font-size: 14px;">{{ ProfileN.bio }}</p>
-          </div>
-      </div>
-  </div>
-</div>
 <div class="container-fluid text-center"> 
+
+<style>
+  .card2{ position: relative; overflow: hidden; padding: 3rem 0; background-color: var(--body-color); } .card2__container{ display: grid; gap: 1.5rem; } .card2__glass{ position: relative; overflow: hidden; text-align: center; padding: 2.5rem; background: linear-gradient(130deg, rgba(251,251,254,.6), rgba(251,251,254,.2)); box-shadow: inset 2px 2px 1px rgba(251,251,254,.3) inset -2px -2px 1px rgba(251,251,254,.2); border-radius: 1.5rem; backdrop-filter: blur(10px); } .card2__img{ width: 180px; height: 180px; border-radius: 30% 70% 70% 30% / 30% 36% 64% 70% ; border: 2px solid #F4F4FB; margin-bottom: 1rem; } .card2__data{ margin-bottom: 1.5rem; } .card2__title{ font-size: var(--h3-font-size); color: var(--title-color); font-weight: 600; margin-bottom: .25rem; } .card2__profession{ font-size: var(--small-font-size); color: var(--text-color); font-weight: 500; } .card2__button{ display: inline-block; background: linear-gradient(130deg, rgba(251,251,254,.9), rgba(251,251,254,.2)); padding: .75rem 1.5rem; border-radius: .5rem; color: var(--title-color); font-weight: 500; transition: .4s; } .card2__button:hover{ background: linear-gradient(130deg, rgba(251,251,254,1), rgba(251,251,254,.4)); } .card2__social{ position: absolute; top: 50%; transform: translateY(-50%); } .card2__link{ display: block; font-size: 1.35rem; color: var(--title-color); margin: 1rem 0; transform: translateX(-5rem); } .card2__link:nth-child(1){ transition: .2s; } .card2__link:nth-child(2){ transition: .5s; } .card2__link:nth-child(3){ transition: .7s; } .card2__glass:hover .card2__link{ transform: translateX(-1.5rem); } .card2__circle{ position: absolute; width: 250px; height: 250px; background: linear-gradient(130deg, rgba(77,73,191,.8), rgba(255,255,255,.2)); border-radius: 50%; } .card2__circle1{ top: 20%; left: -20%; } .card2__circle2{ bottom: -5%; right: -25%; background: linear-gradient(130deg, rgba(5,219,242,.8), rgba(255,255,255,.2)); } /*========== MEDIA QUERIES ==========*/ @media screen and (min-width: 568px){ .card2__container{ grid-template-columns: repeat(2, 1fr); } } @media screen and (min-width: 768px){ .bd-container{ margin-left: auto; margin-right: auto; } .card2{ padding: 0; } .card2__container{ height: 100vh; grid-template-columns: repeat(3, 1fr); align-content: center; } .card2__circle1{ left: 5%; top: 12%; } .card2__circle2{ right: 8%; bottom: 15%; } }
+</style>
+  <section class="card2">
+    <div class="card2__circle card2__circle1"></div>
+    <div class="card2__circle card2__circle2"></div>
+
+    <div class="card2__container2 bd-container2">
+        <div class="card2__glass">
+            <img src="{{ ProfileN.avatar.url }}" alt="" class="card2__img">
+
+            <div class="card2__data">
+                <h3 class="card2__title">{{ ProfileN.fullName }}</h3>
+                <span class="card2__profession">{{ ProfileN.bio }}</span>
+            </div>
+            
+            <div class="card2__social2">
+              {% if ProfileN.twitter %}
+                <a href="{{ ProfileN.facebook }}" class="card2__button"><i class='fab fa-twitter'></i></a>
+                {% endif %}
+                {% if ProfileN.facebook %}
+                <a href="{{ ProfileN.twitter }}" class="card2__button"><i class='fab fa-facebook' ></i></a>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
       <div class="py-5">
         <div class="row justify-content-center">  
           <div class="col-md-7"> 
