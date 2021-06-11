@@ -26,8 +26,8 @@ INSTALLED_APPS = [
     'import_export',
     'taggit',
     'django_summernote',
-    # 'ckeditor',
-    # 'ckeditor_uploader',
+    'ckeditor',
+    'ckeditor_uploader',
     # 'tinymce',
     'categories',
     # 'froala_editor',
@@ -118,9 +118,20 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 # Error code
-CKEDITOR_BASEPATH = "/my_static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
-
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ],
+        'height': 300,
+        'width': 600,
+    },
+}
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")	 
@@ -157,11 +168,7 @@ QUILL_CONFIGS = {
 }
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-# FRAOLA_EDITOR_THIRD_PARTY = ('image_aviary', 'spell_checker')
-# FROALA_EDITOR_PLUGINS = ('align', 'char_counter', 'code_beautifier' ,'code_view', 'colors', 'draggable', 'emoticons',
-#         'entities', 'file', 'font_family', 'font_size', 'fullscreen', 'image_manager', 'image', 'inline_style',
-#         'line_breaker', 'link', 'html','lists', 'paragraph_format', 'paragraph_style', 'quick_insert', 'quote', 'save', 'table',
-#         'url', 'video')
+
 SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4 
 
 

@@ -26,9 +26,8 @@ INSTALLED_APPS = [
     'import_export',
     'taggit',
     'django_summernote',
-    'django_quill',
-    # 'ckeditor',
-    # 'ckeditor_uploader',
+    'ckeditor',
+    'ckeditor_uploader',
     # 'tinymce',
     'categories',
     # 'froala_editor',
@@ -42,6 +41,7 @@ SITE_ID =1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -60,6 +60,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
                 'django.contrib.messages.context_processors.messages',
                 'blog.views.category_list',
                 'accounts.views.avatar'
@@ -86,7 +87,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db',
+        'NAME': 'db1',
         'USER': 'postgres', 
         'PASSWORD': 'a',
         'HOST': 'localhost',
@@ -106,6 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+LANGUAGES = [
+  ('ar', ('Arabic')),
+#   ('en', ('English')),
 ]
 LANGUAGE_CODE = 'ar-EG'
 TIME_ZONE = 'UTC'
@@ -138,7 +143,7 @@ QUILL_CONFIGS = {
             'syntax': True,
             'toolbar': [
                 [ 
-                    {'header': []},
+                    {'header': [2,3,4,5,6]},
                     {'align': []},
                     'bold', 'italic', 'underline', 'strike', 'blockquote',
                     {'color': []},

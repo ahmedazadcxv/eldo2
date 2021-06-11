@@ -2,10 +2,12 @@ from django import forms
 from .models import CommentT, Category, Topic
 from mptt.forms import TreeNodeChoiceField
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from ckeditor.widgets import CKEditorWidget
 
 class NewTopicForm(forms.ModelForm):
 
     content = forms.CharField(widget=SummernoteInplaceWidget())
+    # content = forms.CharField(widget=CKEditorWidget())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

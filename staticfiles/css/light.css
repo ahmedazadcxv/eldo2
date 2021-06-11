@@ -4,6 +4,7 @@
 body{
   font-size: 14px;
   background-color: #f1f6ff;
+  background-color: #e9e8ec;
 }
   .h1 {
     font-family: 'PT Serif', serif;
@@ -21,8 +22,7 @@ body{
     padding-top: 1px;
   }
 
-  p {
-    font-family: 'PT Serif', serif;
+  p {font-family: 'Lalezar', cursive;
     line-height: 2rem;
     font-size: 1.3rem
   }
@@ -149,9 +149,11 @@ body{
     padding: 7px 20px;
     float: right;
     font-size: 12px;
-    background: #ffffff;
+    background: #ffffff99;
     color: #000000;
     box-shadow: 0px 10px 20px -10px #1376c5;
+    
+    box-shadow: 0 7px 11px -3px rgb(45 35 66 / 20%), 0 2px 4px 0 rgb(45 35 66 / 40%), inset 0 -3px 0 0 #cfd1e3,0px 10px 20px -10px #1376c5;
     border-radius: 25px;
     text-transform: uppercase;
 }
@@ -209,10 +211,13 @@ body{
   }
   
   .stories a {
-    float:right;
-    font-weight:400;
+    display: inline-block;
+    font-weight:200;
     color:#1976f3;
     text-decoration:none;
+    border: 1px solid #ffffff;
+    box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 61%);
+    transition: .5s;
   }
   .stories ul {
     margin:0;
@@ -280,14 +285,19 @@ body{
      direction: ltr;
   }
   .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
-      width: 35px;
-      height: 35px;
-      border-radius: 80px;
-      background-color: #111;
+    width: 35px;
+    height: 35px;
+    border-radius: 80px;
+    font-size: 22px;
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0px 10px 20px -10px #1376c5;
+    box-shadow: 0 7px 11px -3px rgb(45 35 66 / 20%), 0 2px 4px 0 rgb(45 35 66 / 40%), inset 0 -3px 0 0 #cfd1e3, 0px 10px 20px -10px #1376c5;
+    border-radius: 25px;
   }
    
 .fontd{
-    background-color: #ffffff;
+    background-color: #ffffff8c;
     color: rgb(31, 31, 31);
 }
 .card{
@@ -324,7 +334,7 @@ body{
 .shadowX { 
   font-size: 12px; 
   color: #000000;
-  box-shadow: 0px 10px 20px -10px #1376c5;
+  box-shadow: 0 7px 11px -3px rgb(45 35 66 / 20%), 0 2px 4px 0 rgb(45 35 66 / 40%), inset 0 -3px 0 0 #cfd1e3,0px 10px 20px -10px #1376c5;
   border-radius: 25px;
   text-transform: uppercase;
 }

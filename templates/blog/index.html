@@ -1,5 +1,5 @@
 {% extends "../base/base.html" %}
-{% block title %} مقالات طبية – الدكتور {% endblock %}
+{% block title %} {{siteName.nameHome }}{% endblock %}
 
 {% block metaHead %}
   
@@ -9,8 +9,8 @@
     "@context": "http://schema.org",
     "@type": "Organization",
     "url": "https://www.webteb.com/",
-    "name": "ويب طب",
-    "alternateName": "WebTeb",
+    "name": "{{siteName.nameHome }}",
+    "alternateName": "{{siteName.nameHome }}",
     "sameAs": [
     "https://www.facebook.com/Eldoctooor",
     "https://www.youtube.com/channel/UC4of8xqL-SpDvTdOrRzS4sw/",
@@ -23,8 +23,8 @@
     {
         "@context": "http://schema.org",
         "@type": "WebPage",
-        "name": "مقالات طبية – الدكتور",
-        "description": "أكبر منصة طبية على الإنترنت العربي تحارب انتشار المعلومات المضللة والعلم الزائف وتنشر أحدث المعلومات الطبية بطريقة مبسطة"
+        "name": "{{ siteName.nameHome }} ",
+        "description": "{{ siteName.bioHome }}"
     }
 </script>
 
@@ -41,12 +41,9 @@
   }
   </script>
 <meta property="og:url" content="{{request.build_absolute_uri}}">
-<meta property="og:image" content="{{post.image.url}}" id="im">
-<meta property="og:title" content=" مقالات طبية – الدكتور ">
-<meta property="og:description" content="أكبر منصة طبية على الإنترنت العربي تحارب انتشار المعلومات المضللة والعلم الزائف وتنشر أحدث المعلومات الطبية بطريقة مبسطة">
-<script>
-document.getElementById('im').setAttribute("content", window.location.origin +'/media/posts/default.jpg'); 
-</script>
+<meta property="og:image" content="{{siteName.imageHome.url}}" id="im">
+<meta property="og:title" content="{{ siteName.nameHome }} ">
+<meta property="og:description" content="{{ siteName.bioHome }} ">
 
 {% endblock metaHead %}
   
@@ -336,7 +333,112 @@ $(document).ready(function() {
     </div>
 
 
+<style>
+  
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+img{
+	max-width: 100%;
+	vertical-align: middle;
+}
+/*team section*/
+.team{
+	background-color: var(--pink-light);
+	min-height: 100vh;
+	padding: 80px 0;
+}
+.team-item{
+	width: calc((100% / 3) - 30px);
+	margin:0 15px 30px;
+	position: relative;
+    transition: box-shadow 0.5s ease;	
+}
+.team-item:hover{
+   box-shadow: 0 0 15px #b7a6ce;
+}
+.team-item img{
+	width: calc(100% - 60px);
+	position: relative;
+	z-index: 1;
+	transition: transform 0.5s ease;
+}
+.team-item:hover img{
+   transform: translateX(60px);
+}
+.team-item h3{
+	position: absolute;
+	background-color: #E9E8EC;
+	right: 0;
+	bottom: 15px;
+	padding: 2px 10px;
+	border-radius: 4px;
+	color: #222222;
+	font-size: 18px;
+	font-weight: 600;
+	text-transform: capitalize;
+	z-index: 2;
+	transition: right 0.5s ease;
+	margin-left: 75px;
+}
+.team-item:hover h3{
+	right: 15px;
+}
+.team-item h3 span{
+	display: block;
+	font-size: 16px;
+	font-weight: 400;
+	color: #555555;
+}
+.team-item .social-links{
+	position: absolute;
+	left:0;
+	top:0;
+	width: 60px;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	transform: translateX(100%);
+	opacity: 0;
+	transition: all 0.5s ease;
+}
+.team-item:hover .social-links{
+	transform: translateX(0%);
+	opacity: 1;
+}
+.team-item .social-links a{
+	display: block;
+	height: 35px;
+	width: 35px;
+	line-height: 35px;
+	font-size: 16px;
+	color: #777777;
+	border:1px solid #777777;
+	border-radius: 50%;
+	margin:3px 0;
+	text-align: center;
+	transition: all 0.5s ease;
+}
+.team-item .social-links a:hover{
+	color: var(--pink);
+	border-color: var(--pink);
+}
 
+/*responsive*/
+@media(max-width: 991px){
+   .team-item{
+   	width: calc(50% - 30px);
+   }
+}
+@media(max-width: 575px){
+   .team-item{
+   	width: calc(100% - 30px);
+   }	
+}
+</style>
     <!-- Team section -->
 <div class="team">
   <div class="container">
@@ -344,63 +446,40 @@ $(document).ready(function() {
       <div class=" read-more " style="font-size: 22px; color:#F97300;">الأطباء</div>
     </div>
    <div class="row justify-content-center">
-     {% for pro in profile %}
-       
-    <div class="col-lg-3 col-md-3 col-sm-12 item shadow-lg">
-      <img src="{{pro.avatar.url}}" class="img-fluid w-100" alt="team">
-      <div class="des">
-        
-        <a href="{% url 'blog:post_user' pro.slug %}" class="read-more" style="color: #F97300; font-size: 20px;">{{pro.fullName}}  </a>
-        <div class=" read-more" style="font-size: 15px;">
 
-          {% if pro.twitter %}
-          <a href="{{ pro.twitter }}" class="fab fa-twitter shadow-lg" target="_blank"></a>
-          {% endif %}
-          {% if pro.facebook %}
-          <a href="{{ pro.facebook }}" class="fab fa-facebook shadow-lg " target="_blank"></a>
-          {% endif %}
-        <!-- <a class="fab fa-whatsapp" href=" "> </a> -->
-        </div>
-        <p class="d-none  " id="hao">fffffffffffffffffffffffffffffff fzzzzzzzzzzzzzzzzzzzzzzzzzz</p>
-       </div>
-      <!-- <span class="text-muted">Manager </span> -->
-     </div>
-     
+ 
+    <section class="team">
+      <div class="container"> 
+        <div class="row">
+          {% for pro in profile %}
+          <div class="team-item">
+            <a href="{% url 'blog:post_user' pro.slug %}"><img src="{{pro.avatar.url}}" alt="team"></a>
+            <h3>{{pro.fullName}} <span>{{pro.bio|truncatechars:50}} </span></h3>
+            <div class="social-links">
+              {% if pro.twitter %}
+              <a href="{{ pro.twitter }}" class="fab fa-twitter shadow-lg" target="_blank"></a>
+              {% endif %}
+              {% if pro.facebook %}
+              <a href="{{ pro.facebook }}" class="fab fa-facebook shadow-lg " target="_blank"></a>
+              {% endif %}
+            </div>
+          </div>
      {% endfor %}
+
+        </div>
+      </div>
+    </section>
+
+    
    </div>
   </div>
  </div>
 
- <style>
-.team{
- margin: 4em 0;
- position: relative;  
-} 
-.team .item{
- position: relative;
-}
-.team .des{
- background: #F97300;
- color: #fff;
- text-align: center;
- border-bottom-left-radius: 93%;
- transition:.5s ease-in-out;
-}
-.team .item:hover .des{
-  display: block;
- height: 100%;
- background:#f973007d;
- position: absolute;
- top: 0;
- border-bottom-left-radius: 0;
-}
-.team:hover #hao{
-  display: block; 
-}
+ <style> 
 .team img{
     border-top: 5px solid #ff8e72;
     border-bottom: 5px solid #ff8e72;
-    border-radius: 50% 50% 50% 0;
+    border-radius: 55% 45% 23% 77% / 55% 61% 39% 45% ;
     overflow: hidden;
 }
 .team img:hover{ 

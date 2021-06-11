@@ -8,7 +8,7 @@ import random
 
 from .forms import NewCommentForm, PostSearchForm
 from .models import Category, Comment, Post,Page
-from accounts.models import Profile
+from accounts.models import Profile,siteName
 
 
 def home(request):
@@ -21,7 +21,7 @@ def home(request):
     
     pins = Post.objects.filter( pin='home' )
     profileN = Profile.objects.filter(dr=True)
-    return render(request, 'blog/index.html', {'posts': page_obj,'pins': pins, 'Category': Category.objects.all(),'profile': profileN })
+    return render(request, 'blog/index.html', {'posts': page_obj,'siteName': siteName.objects.first(),'pins': pins, 'Category': Category.objects.all(),'profile': profileN })
 
 def videos(request):
 
@@ -32,7 +32,7 @@ def videos(request):
     page_obj = paginator.get_page(page_number)
     
     pins = Post.objects.filter( pin='videos' )
-    return render(request, 'blog/videos.html', {'posts': page_obj,'pins': pins, 'Category': Category.objects.all() })
+    return render(request, 'blog/videos.html', {'posts': page_obj,'siteName': siteName.objects.first(),'pins': pins, 'Category': Category.objects.all() })
 
 
 

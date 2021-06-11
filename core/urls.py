@@ -20,7 +20,6 @@ urlpatterns += i18n_patterns(
     path('services/', include('services.urls', namespace='services')),
     path('summernote/', include('django_summernote.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('froala_editor/', include('froala_editor.urls')), 
     path('tinymce/', include('tinymce.urls')),
     url(r'^robots\.txt', include('robots.urls')),
 
